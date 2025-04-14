@@ -1,4 +1,4 @@
-const BACKEND_PATH = "http://localhost:3001";
+const BACKEND_PATH = "http://localhost:4000";
 
 function populateFiltersOptions() {
   const typesSelect = document.getElementById("type");
@@ -48,7 +48,7 @@ function handleFilterBtnClick() {
   // console.log(queryParams);
 
   // formar o url
-  const url = `${BACKEND_PATH}/api/products?${queryParams}`;
+  const url = `${BACKEND_PATH}/api/products?${queryParams}&limit=100`;
   console.log(url);
 
   fetch(url)
@@ -59,12 +59,12 @@ function handleFilterBtnClick() {
       result.forEach((product) => {
         let productElement = `<div class="col-md-4 mb-4"><div class="card">
                 <div class="card-body">
-               
+                  <img src="${product.image_url}" class= "card-img-top" alt= "${product.title}"/>
                   <h5 class="card-title">${product.title}</h5>
-                  <p class="card-text"><small>${product.brand}, ${product.type}></p>
+                  <p class="card-text"><small>${product.brand}, ${product.type}</p>
                   <p class="card-text">${product.price}</p>
-                  <p class="card-text">${product.description}</p>
-                  <button data-id ="${product.id}" class="btn btn-danger delete-btn">Delete ${product.id}</button>
+                  <p class="card-text"><small>${product.description}</small></p>
+                  <button data-id ="${product.id}" class="btn btn-danger delete-btn">Delete</button>
                 </div>
                 </div>`;
 
@@ -79,6 +79,7 @@ function handleFilterBtnClick() {
 }
 
 function handleDeleteProduct(event) {
+  if(confirm("tem a ceretza que pretende apagar o seguinte produto")){
   const productId = event.target.dataset.id;
 
   const requestOptions = {
@@ -97,6 +98,6 @@ function handleDeleteProduct(event) {
       event.target.parentElement.parentElement.parentElement.remove();
     })
     .catch((error) => console.error(error));
-}
+}}
 
 handleFilterBtnClick();
