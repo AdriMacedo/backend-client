@@ -1,0 +1,16 @@
+{
+  "name": "products-page",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "http-server -c-1 ."
+  },
+  "devDependencies": {
+    "@ljharb/tsconfig": "^0.3.2",
+    "http-server": "^14.1.1",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "math-intrinsics": "^1.1.0"
+  }
+}
