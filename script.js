@@ -37,6 +37,42 @@ function populateFiltersOptions() {
 
 populateFiltersOptions();
 
+// criar o formulario
+
+const loginForm = document.getElementById("loginForm");
+
+async function login(email, password) {
+  try {
+    const response = fetch(`${BACKEND_PATH}/auth/users/login`, {
+      method: "POST",
+      headers: {
+        "Comtent-Type": "application/json"
+      },
+      body: JSON.stringify({email, password});
+    });
+
+
+  } catch (error) {
+    console.log(error);
+    }
+}
+
+loginForm.addEventListener("submit", async (event)=> {
+event.preventDefault(); 
+const email = document.getElementById("email").value;
+const password = document.getElementById("password").value;
+try {
+  await login(email, password);
+  console.log("logged in sucessfully:");
+} catch (error) {
+  console.log("login failed: ", error);
+}
+
+});
+
+
+
+
 // criar funcao do btn dos filtros
 function handleFilterBtnClick() {
   const typeId = document.getElementById("type").value;
